@@ -20,7 +20,7 @@ public class PersonController {
         return personServices.findAll();
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Person findById(@PathVariable(value = "id") String id){
+    public Person findById(@PathVariable(value = "id") Long id){
         return personServices.findById(id);
     }
 
@@ -35,7 +35,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteById(@PathVariable(value = "id") String id){
+    public void deleteById(@PathVariable(value = "id") Long id){
         personServices.delete(id);
     }
 }
