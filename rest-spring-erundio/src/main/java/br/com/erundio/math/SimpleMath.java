@@ -1,12 +1,9 @@
-package br.com.erundio.service;
+package br.com.erundio.math;
 
 import org.springframework.stereotype.Service;
 
 @Service
-public class MathService {
-
-
-
+public class SimpleMath {
 
     public Double convertToDouble(String strNumber) {
         if (strNumber == null){

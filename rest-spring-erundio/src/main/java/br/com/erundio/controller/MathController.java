@@ -1,6 +1,6 @@
 package br.com.erundio.controller;
 
-import br.com.erundio.service.MathService;
+import br.com.erundio.math.SimpleMath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,37 +13,37 @@ public class MathController {
     private final AtomicLong counter = new AtomicLong();
 
     @Autowired
-    private MathService mathService;
+    private SimpleMath simpleMath;
 
     @RequestMapping(value = "/sum/{num1}/{num2}", method = RequestMethod.GET)
     public Double sum(
             @PathVariable(value = "num1") String num1,
             @PathVariable(value = "num2") String num2) throws Exception{
 
-        if (!mathService.isNumeric(num1) || !mathService.isNumeric(num2)){
+        if (!simpleMath.isNumeric(num1) || !simpleMath.isNumeric(num2)){
             throw new UnsupportedOperationException("Set a numeric value");
         }
-        return mathService.sum(num1, num2);
+        return simpleMath.sum(num1, num2);
     }
     @RequestMapping(value = "/sub/{num1}/{num2}", method = RequestMethod.GET)
     public Double sub(
             @PathVariable(value = "num1") String num1,
             @PathVariable(value = "num2") String num2) throws Exception{
 
-        if (!mathService.isNumeric(num1) || !mathService.isNumeric(num2)){
+        if (!simpleMath.isNumeric(num1) || !simpleMath.isNumeric(num2)){
             throw new UnsupportedOperationException("Set a numeric value");
         }
-        return mathService.sub(num1, num2);
+        return simpleMath.sub(num1, num2);
     }
     @RequestMapping(value = "/mult/{num1}/{num2}", method = RequestMethod.GET)
     public Double mult(
             @PathVariable(value = "num1") String num1,
             @PathVariable(value = "num2") String num2) throws Exception{
 
-        if (!mathService.isNumeric(num1) || !mathService.isNumeric(num2)){
+        if (!simpleMath.isNumeric(num1) || !simpleMath.isNumeric(num2)){
             throw new UnsupportedOperationException("Set a numeric value");
         }
-        return mathService.mult(num1, num2);
+        return simpleMath.mult(num1, num2);
 
     }
 
@@ -52,10 +52,10 @@ public class MathController {
             @PathVariable(value = "num1") String num1,
             @PathVariable(value = "num2") String num2) throws Exception{
 
-        if (!mathService.isNumeric(num1) || !mathService.isNumeric(num2)){
+        if (!simpleMath.isNumeric(num1) || !simpleMath.isNumeric(num2)){
             throw new UnsupportedOperationException("Set a numeric value");
         }
-        return mathService.div(num1, num2);
+        return simpleMath.div(num1, num2);
 
     }
 
@@ -63,10 +63,10 @@ public class MathController {
     public Double avg(
             @PathVariable(value = "num1") String num1,
             @PathVariable(value = "num2") String num2) throws Exception{
-        if (!mathService.isNumeric(num1) || !mathService.isNumeric(num2)){
+        if (!simpleMath.isNumeric(num1) || !simpleMath.isNumeric(num2)){
             throw new UnsupportedOperationException("Set a numeric value");
         }
-        return mathService.avg(num1, num2);
+        return simpleMath.avg(num1, num2);
 
     }
 
@@ -74,10 +74,10 @@ public class MathController {
     public Double sqrRoot(
             @PathVariable(value = "num1") String num1) throws Exception{
 
-        if (!mathService.isNumeric(num1)){
+        if (!simpleMath.isNumeric(num1)){
             throw new UnsupportedOperationException("Set a numeric value");
         }
-        return mathService.sqrRoot(num1);
+        return simpleMath.sqrRoot(num1);
 
     }
 
