@@ -1,4 +1,4 @@
-package br.com.erundio.exceptions;
+package br.com.erudio.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

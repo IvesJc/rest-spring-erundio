@@ -1,9 +1,9 @@
-package br.com.erundio.controller;
+package br.com.erudio.controller;
 
-import br.com.erundio.model.Person;
-import br.com.erundio.services.PersonService;
+import br.com.erudio.model.Person;
+import br.com.erudio.dto.PersonDTO;
+import br.com.erudio.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +17,11 @@ public class PersonController {
     private PersonService personServices;
 
     @GetMapping
-    public List<Person> findAll(){
+    public List<PersonDTO> findAll(){
         return personServices.findAll();
     }
     @GetMapping(value = "/{id}")
-    public Person findById(@PathVariable(value = "id") Long id){
+    public PersonDTO findById(@PathVariable(value = "id") Long id){
         return personServices.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class PersonController {
     }
 
     @PutMapping
-    public Person update(@RequestBody Person person){
+    public Person update(@RequestBody PersonDTO person){
         return personServices.update(person);
     }
 

@@ -1,4 +1,4 @@
-package br.com.erundio.model;
+package br.com.erudio.model;
 
 import jakarta.persistence.*;
 
@@ -23,6 +23,8 @@ public class Person implements Serializable {
     private String gender;
 
     public Person() {
+    }
+    public Person(Long id, String s, String s1, String adress, String gender) {
     }
 
     public Long getId() {
