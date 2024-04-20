@@ -1,5 +1,6 @@
 package br.com.erudio.services;
 
+import br.com.erudio.dto.mapper.ModelMapper;
 import br.com.erudio.dto.mapper.PersonDTOMapper;
 import br.com.erudio.exceptions.ResourceNotFoundExecption;
 import br.com.erudio.model.Person;
@@ -25,41 +26,40 @@ public class PersonService {
 
     public List<PersonDTO> findAll(){
         logger.info("Finding all people!");
-        return personRepository.
-                findAll().
-                stream().
-                map(mapper).
-                toList();
+        return ModelMapper.parseListObjects(personRepository.findAll(), PersonDTO.class);
     }
 
 
     public PersonDTO findById(Long id){
         logger.info("Finding one person!");
-        return personRepository.
-                findById(id).
-                map(mapper).
-                orElseThrow(() -> new ResourceNotFoundExecption("No records found for this ID"));
+        Person entity = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExecption("No records found for this ID!"));
+        return ModelMapper.parseObject(entity, PersonDTO.class);
     }
 
 
-    public Person create(Person person){
+    public PersonDTO create(PersonDTO personDTO){
+        // recebe DTO       ^^^^^^^^^^^^^^^^^^^^
         logger.info("Creating one person!");
-        return personRepository.save(person);
+        Person entity = ModelMapper.parseObject(personDTO, Person.class);
+        // converte o DTO para a entidade       ^^^^^^^^^^^^^^^^^^^^^^^
+        var entidade = personRepository.save(entity);
+        return ModelMapper.parseObject(entidade, PersonDTO.class);
+        //                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+        // pra finalizar, converte entidade em DTO
 
     }
-    public Person update(PersonDTO personDTO){
+    public PersonDTO update(PersonDTO personDTO){
         logger.info("Updating one person!");
 
-        Optional<Person> optionalPerson = personRepository.findById(personDTO.id());
-        if (optionalPerson.isPresent()){
-            Person person = optionalPerson.get();
-            person.setFirstName(personDTO.firstName());
-            person.setLastName(personDTO.lastName());
-            person.setAdress(personDTO.lastName());
-            person.setGender(personDTO.gender());
-            return personRepository.save(person);
-        }
-        throw new ResourceNotFoundExecption("Person not found!");
+        Person entity =
+                personRepository.findById(personDTO.getId()).orElseThrow(() -> new ResourceNotFoundExecption(
+                        "No records found for this ID"));
+        entity.setFirstName(personDTO.getFirstName());
+        entity.setLastName((personDTO.getLastName()));
+        entity.setAdress(personDTO.getAdress());
+        entity.setGender(personDTO.getGender());
+
+        return ModelMapper.parseObject(personRepository.save(entity), PersonDTO.class);
     }
 
     public void delete(Long id){

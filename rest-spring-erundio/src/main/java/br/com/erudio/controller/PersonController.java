@@ -26,12 +26,12 @@ public class PersonController {
     }
 
     @PostMapping
-    public Person create(@RequestBody Person person){
+    public PersonDTO create(@RequestBody PersonDTO person){
         return personServices.create(person);
     }
 
     @PutMapping
-    public Person update(@RequestBody PersonDTO person){
+    public PersonDTO update(@RequestBody PersonDTO person){
         return personServices.update(person);
     }
 
