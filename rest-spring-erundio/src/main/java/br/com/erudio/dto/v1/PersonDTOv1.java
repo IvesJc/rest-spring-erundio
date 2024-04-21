@@ -1,8 +1,6 @@
-package br.com.erudio.dto;
+package br.com.erudio.dto.v1;
 
-import br.com.erudio.model.Person;
-
-public class PersonDTO{
+public class PersonDTOv1 {
 
     private Long id;
     private String firstName;
@@ -10,10 +8,10 @@ public class PersonDTO{
     private String adress;
     private String gender;
 
-    public PersonDTO() {
+    public PersonDTOv1() {
     }
 
-    public PersonDTO(Long id, String firstName, String lastName, String adress, String gender) {
+    public PersonDTOv1(Long id, String firstName, String lastName, String adress, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

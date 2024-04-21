@@ -1,6 +1,4 @@
-package br.com.erudio.dto.mapper;
-
-import br.com.erudio.dto.PersonDTO;
+package br.com.erudio.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
