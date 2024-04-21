@@ -1,16 +1,16 @@
 package br.com.erudio.services;
 
-import br.com.erudio.dto.mapper.ModelMapper;
-import br.com.erudio.dto.mapper.PersonDTOMapper;
+import br.com.erudio.dto.v2.PersonDTOv2;
+import br.com.erudio.mapper.ModelMapper;
 import br.com.erudio.exceptions.ResourceNotFoundExecption;
+import br.com.erudio.mapper.custom.PersonMapper;
 import br.com.erudio.model.Person;
-import br.com.erudio.dto.PersonDTO;
+import br.com.erudio.dto.v1.PersonDTOv1;
 import br.com.erudio.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
@@ -20,46 +20,55 @@ public class PersonService {
     private PersonRepository personRepository;
 
     @Autowired
-    private PersonDTOMapper mapper;
+    private PersonMapper mapper;
 
     private Logger logger = Logger.getLogger(PersonService.class.getName());
 
-    public List<PersonDTO> findAll(){
+    public List<PersonDTOv1> findAll(){
         logger.info("Finding all people!");
-        return ModelMapper.parseListObjects(personRepository.findAll(), PersonDTO.class);
+        return ModelMapper.parseListObjects(personRepository.findAll(), PersonDTOv1.class);
     }
 
 
-    public PersonDTO findById(Long id){
+    public PersonDTOv1 findById(Long id){
         logger.info("Finding one person!");
         Person entity = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundExecption("No records found for this ID!"));
-        return ModelMapper.parseObject(entity, PersonDTO.class);
+        return ModelMapper.parseObject(entity, PersonDTOv1.class);
     }
 
 
-    public PersonDTO create(PersonDTO personDTO){
+    public PersonDTOv1 create(PersonDTOv1 personDTOv1){
         // recebe DTO       ^^^^^^^^^^^^^^^^^^^^
         logger.info("Creating one person!");
-        Person entity = ModelMapper.parseObject(personDTO, Person.class);
+        Person entity = ModelMapper.parseObject(personDTOv1, Person.class);
         // converte o DTO para a entidade       ^^^^^^^^^^^^^^^^^^^^^^^
         var entidade = personRepository.save(entity);
-        return ModelMapper.parseObject(entidade, PersonDTO.class);
+        return ModelMapper.parseObject(entidade, PersonDTOv1.class);
         //                             ^^^^^^^^^^^^^^^^^^^^^^^^^
         // pra finalizar, converte entidade em DTO
-
     }
-    public PersonDTO update(PersonDTO personDTO){
+    public PersonDTOv2 createV2(PersonDTOv2 personDTOv2){
+        // recebe DTO       ^^^^^^^^^^^^^^^^^^^^
+        logger.info("Creating one person with V2!");
+        Person entity = mapper.convertDTOToEntity(personDTOv2);
+        // converte o DTO para a entidade       ^^^^^^^^^^^^^^^^^^^^^^^
+        var entidade = personRepository.save(entity);
+        return mapper.convertEntityToDTO(entidade);
+        //                             ^^^^^^^^^^^^^^^^^^^^^^^^^
+        // pra finalizar, converte entidade em DTO
+    }
+    public PersonDTOv1 update(PersonDTOv1 personDTOv1){
         logger.info("Updating one person!");
 
         Person entity =
-                personRepository.findById(personDTO.getId()).orElseThrow(() -> new ResourceNotFoundExecption(
+                personRepository.findById(personDTOv1.getId()).orElseThrow(() -> new ResourceNotFoundExecption(
                         "No records found for this ID"));
-        entity.setFirstName(personDTO.getFirstName());
-        entity.setLastName((personDTO.getLastName()));
-        entity.setAdress(personDTO.getAdress());
-        entity.setGender(personDTO.getGender());
+        entity.setFirstName(personDTOv1.getFirstName());
+        entity.setLastName((personDTOv1.getLastName()));
+        entity.setAdress(personDTOv1.getAdress());
+        entity.setGender(personDTOv1.getGender());
 
-        return ModelMapper.parseObject(personRepository.save(entity), PersonDTO.class);
+        return ModelMapper.parseObject(personRepository.save(entity), PersonDTOv1.class);
     }
 
     public void delete(Long id){
