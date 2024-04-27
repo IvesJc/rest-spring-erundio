@@ -12,7 +12,20 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         //faz aceitar parametros
-        configurer.favorParameter(true).
+        configurer.favorParameter(false).
+                ignoreAcceptHeader(false).
+                //This line configures whether Spring should use only registered file extensions for content negotiation. If set to false, Spring will also consider other methods such as query parameters and the Accept header.
+                useRegisteredExtensionsOnly(false).
+                // meaning JSON will be the default response format
+                defaultContentType(MediaType.APPLICATION_JSON).
+                //  "json" can be used as a parameter value in requests to indicate that the client wants JSON responses.
+                mediaType("json", MediaType.APPLICATION_JSON).
+                // "xml" as a parameter value to indicate that they want XML responses.
+                mediaType("xml", MediaType.APPLICATION_XML);
+
+        // Media Type via QUERY PARAM
+        // http://localhost:8080/api/person/v1/1?mediaType=xml
+        /*configurer.favorParameter(true).
                 parameterName("mediaType").
                 ignoreAcceptHeader(true).
                 //This line configures whether Spring should use only registered file extensions for content negotiation. If set to false, Spring will also consider other methods such as query parameters and the Accept header.
@@ -23,6 +36,7 @@ public class WebConfig implements WebMvcConfigurer {
                 mediaType("json", MediaType.APPLICATION_JSON).
                 // "xml" as a parameter value to indicate that they want XML responses.
                 mediaType("xml", MediaType.APPLICATION_XML);
+         */
     }
 
 }
