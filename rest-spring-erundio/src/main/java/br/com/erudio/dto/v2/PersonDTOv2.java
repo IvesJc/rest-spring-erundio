@@ -1,14 +1,15 @@
 package br.com.erudio.dto.v2;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class PersonDTOv2 {
+public class PersonDTOv2 implements Serializable {
 
     private Long id;
     private String firstName;
     private String lastName;
-    private String adress;
+    private String address;
     private String gender;
     private Date birthDay;
 
@@ -39,12 +40,12 @@ public class PersonDTOv2 {
         this.lastName = lastName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getGender() {

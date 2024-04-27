@@ -65,7 +65,7 @@ public class PersonService {
                         "No records found for this ID"));
         entity.setFirstName(personDTOv1.getFirstName());
         entity.setLastName((personDTOv1.getLastName()));
-        entity.setAdress(personDTOv1.getAdress());
+        entity.setAddress(personDTOv1.getAddress());
         entity.setGender(personDTOv1.getGender());
 
         return ModelMapper.parseObject(personRepository.save(entity), PersonDTOv1.class);

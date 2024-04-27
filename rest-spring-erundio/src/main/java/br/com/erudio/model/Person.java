@@ -18,13 +18,13 @@ public class Person implements Serializable {
     @Column(name = "last_name",nullable = false, length = 80)
     private String lastName;
     @Column(nullable = false, length = 100)
-    private String adress;
+    private String address;
     @Column(nullable = false, length = 6)
     private String gender;
 
     public Person() {
     }
-    public Person(Long id, String s, String s1, String adress, String gender) {
+    public Person(Long id, String s, String s1, String address, String gender) {
     }
 
     public Long getId() {
@@ -51,12 +51,12 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getGender() {

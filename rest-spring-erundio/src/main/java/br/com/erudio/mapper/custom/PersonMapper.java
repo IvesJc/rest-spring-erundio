@@ -14,7 +14,7 @@ public class PersonMapper {
         dtOv2.setId(person.getId());
         dtOv2.setFirstName(person.getFirstName());
         dtOv2.setLastName(person.getLastName());
-        dtOv2.setAdress(person.getAdress());
+        dtOv2.setAddress(person.getAddress());
         dtOv2.setGender(person.getGender());
         dtOv2.setBirthDay(new Date());
         return dtOv2;
@@ -24,7 +24,7 @@ public class PersonMapper {
         entity.setId(personDTOv2.getId());
         entity.setFirstName(personDTOv2.getFirstName());
         entity.setLastName(personDTOv2.getLastName());
-        entity.setAdress(personDTOv2.getAdress());
+        entity.setAddress(personDTOv2.getAddress());
         entity.setGender(personDTOv2.getGender());
         //entity.setBirthDay(new Date());
         return entity;
