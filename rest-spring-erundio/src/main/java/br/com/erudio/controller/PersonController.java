@@ -4,6 +4,7 @@ import br.com.erudio.dto.v1.PersonDTOv1;
 import br.com.erudio.dto.v2.PersonDTOv2;
 import br.com.erudio.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,32 +17,41 @@ public class PersonController {
     @Autowired
     private PersonService personServices;
 
-    @GetMapping
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
+                            MediaType.APPLICATION_XML_VALUE})
     public List<PersonDTOv1> findAll(){
         return personServices.findAll();
     }
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}",
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                        MediaType.APPLICATION_XML_VALUE})
     public PersonDTOv1 findById(@PathVariable(value = "id") Long id){
         return personServices.findById(id);
     }
 
-    @PostMapping
+    @PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
+                             MediaType.APPLICATION_XML_VALUE})
     public PersonDTOv1 create(@RequestBody PersonDTOv1 person){
         return personServices.create(person);
     }
 
     // V2 with new attribute
-    @PostMapping(value = "/v2")
+    @PostMapping(value = "/v2",
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                        MediaType.APPLICATION_XML_VALUE})
     public PersonDTOv2 createV2(@RequestBody PersonDTOv2 person){
         return personServices.createV2(person);
     }
 
-    @PutMapping
+    @PutMapping(produces = {MediaType.APPLICATION_JSON_VALUE,
+                            MediaType.APPLICATION_XML_VALUE})
     public PersonDTOv1 update(@RequestBody PersonDTOv1 person){
         return personServices.update(person);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{id}",
+            produces = {MediaType.APPLICATION_JSON_VALUE,
+                        MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<?> deleteById(@PathVariable(value = "id") Long id){
         personServices.delete(id);
         return ResponseEntity.noContent().build();
