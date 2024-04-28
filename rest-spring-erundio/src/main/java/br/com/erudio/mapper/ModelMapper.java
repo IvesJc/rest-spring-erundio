@@ -1,11 +1,20 @@
 package br.com.erudio.mapper;
 
+import br.com.erudio.dto.v1.PersonDTOv1;
+import br.com.erudio.model.Person;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ModelMapper {
 
     private static org.modelmapper.ModelMapper mapper = new org.modelmapper.ModelMapper();
+
+    static {
+        mapper.createTypeMap(Person.class, PersonDTOv1.class).
+                addMapping(Person::getId, PersonDTOv1::setKey);
+    }
+
 
     public static <O,D> D parseObject(O origin, Class<D> destination){
         return mapper.map(origin, destination);
