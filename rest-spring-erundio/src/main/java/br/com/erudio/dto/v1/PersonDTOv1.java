@@ -92,4 +92,15 @@ public class PersonDTOv1 extends RepresentationModel<PersonDTOv1> implements Ser
     public int hashCode() {
         return Objects.hash(super.hashCode(), key, firstName, lastName, address, gender);
     }
+
+    @Override
+    public String toString() {
+        return "PersonDTOv1{" +
+                "key=" + key +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                "} " + super.toString();
+    }
 }
