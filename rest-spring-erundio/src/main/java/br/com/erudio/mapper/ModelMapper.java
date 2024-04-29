@@ -13,6 +13,8 @@ public class ModelMapper {
     static {
         mapper.createTypeMap(Person.class, PersonDTOv1.class).
                 addMapping(Person::getId, PersonDTOv1::setKey);
+        mapper.createTypeMap(PersonDTOv1.class, Person.class).
+                addMapping(PersonDTOv1::getKey, Person::setId);
     }
 
 

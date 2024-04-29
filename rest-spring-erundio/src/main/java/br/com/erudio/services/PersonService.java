@@ -2,6 +2,7 @@ package br.com.erudio.services;
 
 import br.com.erudio.controller.PersonController;
 import br.com.erudio.dto.v2.PersonDTOv2;
+import br.com.erudio.exceptions.RequiredObjectIsNullExecption;
 import br.com.erudio.mapper.ModelMapper;
 import br.com.erudio.exceptions.ResourceNotFoundExecption;
 import br.com.erudio.mapper.custom.PersonMapper;
@@ -50,6 +51,8 @@ public class PersonService {
 
     public PersonDTOv1 create(PersonDTOv1 personDTOv1){
         // recebe DTO       ^^^^^^^^^^^^^^^^^^^^
+
+        if (personDTOv1 == null) throw new RequiredObjectIsNullExecption();
         logger.info("Creating one person!");
         Person entity = ModelMapper.parseObject(personDTOv1, Person.class);
         // converte o DTO para a entidade       ^^^^^^^^^^^^^^^^^^^^^^^
@@ -71,6 +74,7 @@ public class PersonService {
         // pra finalizar, converte entidade em DTO
     }
     public PersonDTOv1 update(PersonDTOv1 personDTOv1){
+        if (personDTOv1 == null) throw new RequiredObjectIsNullExecption();
         logger.info("Updating one person!");
 
         Person entity =
