@@ -238,7 +238,7 @@ public class PersonController {
                             responseCode = "204",
                             content =
                             @Content
-                    ),
+                        ),
                     @ApiResponse(
                             description = "Bad Request",
                             responseCode = "400",
