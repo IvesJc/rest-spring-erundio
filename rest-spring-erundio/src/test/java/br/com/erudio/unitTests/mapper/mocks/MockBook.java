@@ -16,6 +16,8 @@ public class MockBook {
     public BookDTOv1 mockDTO(){
         return mockDTO(0);
     }
+    private final Date mockDate = Date.from(Instant.parse("2010-12-03T10:15:30.00Z"));
+
 
     public List<Book> mockEntityList(){
         List<Book> books = new ArrayList<>();
@@ -36,7 +38,7 @@ public class MockBook {
         Book book = new Book();
         book.setId(num.longValue());
         book.setAuthor("Author Test" +num);
-        book.setLaunchDate(Date.from(Instant.now()));
+        book.setLaunchDate(mockDate);
         book.setPrice(Double.valueOf(num));
         book.setTitle("Title Test" +num);
         return book;
@@ -46,7 +48,7 @@ public class MockBook {
         return new BookDTOv1(
                 num.longValue(),
                 "Author Test" +num,
-                Date.from(Instant.now()),
+                mockDate,
                 Double.valueOf(num),
                 "Title Test" +num);
     }

@@ -1,6 +1,8 @@
 package br.com.erudio.mapper;
 
+import br.com.erudio.dto.v1.BookDTOv1;
 import br.com.erudio.dto.v1.PersonDTOv1;
+import br.com.erudio.model.Book;
 import br.com.erudio.model.Person;
 
 import java.util.ArrayList;
@@ -15,6 +17,11 @@ public class ModelMapper {
                 addMapping(Person::getId, PersonDTOv1::setKey);
         mapper.createTypeMap(PersonDTOv1.class, Person.class).
                 addMapping(PersonDTOv1::getKey, Person::setId);
+
+        mapper.createTypeMap(Book.class, BookDTOv1.class).
+                addMapping(Book::getId, BookDTOv1::setKey);
+        mapper.createTypeMap(BookDTOv1.class, Book.class).
+                addMapping(BookDTOv1::getKey, Book::setId);
     }
 
 

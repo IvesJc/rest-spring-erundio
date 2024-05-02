@@ -20,6 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/person/v1")
 @Tag(name = "People", description = "Endpoints for Managing people")
+// @Tag : Swagger para definir o nome da API e sua descrição
 public class PersonController {
 
     @Autowired

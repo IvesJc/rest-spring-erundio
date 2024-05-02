@@ -2,6 +2,7 @@ package br.com.erudio.unitTests.services;
 
 import br.com.erudio.dto.v1.BookDTOv1;
 import br.com.erudio.model.Book;
+import br.com.erudio.model.Person;
 import br.com.erudio.repositories.BookRepository;
 import br.com.erudio.services.BookService;
 import br.com.erudio.unitTests.mapper.mocks.MockBook;
@@ -29,6 +30,8 @@ import static org.mockito.Mockito.when;
 class BookServiceTest {
 
     MockBook mockBook;
+
+    private final Date mockDate = Date.from(Instant.parse("2010-12-03T10:15:30.00Z"));
 
     @InjectMocks
     private BookService bookService;
@@ -59,9 +62,9 @@ class BookServiceTest {
         assertTrue(bookOne.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
 
         assertEquals("Author Test1", bookOne.getAuthor());
-        assertEquals(Date.from(Instant.now()), bookOne.getLaunchDate());
+        assertEquals(mockDate, bookOne.getLaunchDate());
         assertEquals(Double.valueOf(1), bookOne.getPrice());
-        assertEquals("Title Test", bookOne.getTitle());
+        assertEquals("Title Test1", bookOne.getTitle());
 
     }
 
@@ -79,9 +82,9 @@ class BookServiceTest {
         assertTrue(bookOne.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
 
         assertEquals("Author Test1", bookOne.getAuthor());
-        assertEquals(Date.from(Instant.now()), bookOne.getLaunchDate());
+        assertEquals(mockDate, bookOne.getLaunchDate());
         assertEquals(Double.valueOf(1), bookOne.getPrice());
-        assertEquals("Title Test", bookOne.getTitle());
+        assertEquals("Title Test1", bookOne.getTitle());
 
     }
 
@@ -102,9 +105,9 @@ class BookServiceTest {
         assertTrue(bookOne.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
 
         assertEquals("Author Test1", bookOne.getAuthor());
-        assertEquals(Date.from(Instant.now()), bookOne.getLaunchDate());
+        assertEquals(mockDate, bookOne.getLaunchDate());
         assertEquals(Double.valueOf(1), bookOne.getPrice());
-        assertEquals("Title Test", bookOne.getTitle());
+        assertEquals("Title Test1", bookOne.getTitle());
 
 
     }
@@ -113,6 +116,7 @@ class BookServiceTest {
     void update() {
         Book book = mockBook.mockEntity(1);
         book.setId(1L);
+
         Book persisted = mockBook.mockEntity(1);
         persisted.setId(1L);
 
@@ -122,16 +126,19 @@ class BookServiceTest {
         when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
         when(bookRepository.save(any(Book.class))).thenReturn(persisted);
 
-        BookDTOv1 bookOne = bookService.create(dto);
+
+        BookDTOv1 bookOne = bookService.update(dto);
         assertNotNull(bookOne);
         assertNotNull(bookOne.getKey());
         assertNotNull(bookOne.getLinks());
         assertTrue(bookOne.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
 
         assertEquals("Author Test1", bookOne.getAuthor());
-        assertEquals(Date.from(Instant.now()), bookOne.getLaunchDate());
+        assertEquals(mockDate, bookOne.getLaunchDate());
         assertEquals(Double.valueOf(1), bookOne.getPrice());
-        assertEquals("Title Test", bookOne.getTitle());
+        assertEquals("Title Test1", bookOne.getTitle());
+
+
     }
 
     @Test

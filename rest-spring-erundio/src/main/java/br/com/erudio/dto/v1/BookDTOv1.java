@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-@JsonPropertyOrder
+@JsonPropertyOrder({"id", "author", "launch_date", "price", "title"})
 public class BookDTOv1 extends RepresentationModel<BookDTOv1> implements Serializable {
 
     @JsonProperty("id")

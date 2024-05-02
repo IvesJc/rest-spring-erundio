@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 public class Book implements Serializable {
 
     @Id
@@ -16,7 +16,7 @@ public class Book implements Serializable {
 
     @Column(nullable = false, length = 150)
     private String author;
-    @Column(name = "lauch_date", nullable = false)
+    @Column(name = "launch_date", nullable = false)
     private Date launchDate;
     @Column(nullable = false, length = 5)
     private Double price;
