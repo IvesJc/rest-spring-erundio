@@ -17,8 +17,10 @@ public class Book implements Serializable {
     @Column(nullable = false, length = 150)
     private String author;
     @Column(name = "launch_date", nullable = false)
+    @Temporal(TemporalType.DATE)
+    // @Temporal : generates Date with this format: YYYY-MM-dd
     private Date launchDate;
-    @Column(nullable = false, length = 5)
+    @Column(nullable = false)
     private Double price;
     @Column(nullable = false, length = 100)
     private String title;
