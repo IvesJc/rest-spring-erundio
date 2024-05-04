@@ -24,14 +24,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
+// @ExtendWith : inicializar mocks e preparar para injeção
 class PersonServiceTest {
 
     MockPerson input;
 
     @InjectMocks
+    // @InjectMocks : cria uma instância da classe e injeta mocks que são criados com @Mock
     private PersonService service;
 
     @Mock
+    // @Mock : busca a dependência q tem no Service
     PersonRepository repository;
 
     @BeforeEach
