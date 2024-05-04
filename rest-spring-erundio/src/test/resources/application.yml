@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/rest_with_spring_boot_erundio?useTimezone=true&serverTimezone=UTC
-    username: root
-    password: 123456789
+#    url: jdbc:mysql://localhost:3306/rest_with_spring_boot_erundio?useTimezone=true&serverTimezone=UTC
+#    username: root
+#    password: 123456789
   jpa:
     open-in-view: false
     hibernate:
@@ -16,4 +16,5 @@ springdoc:
   pathsToMatch: /api/**/v1/**
   swagger-ui:
     use-root-path: true
-
+server:
+  port: 8888
