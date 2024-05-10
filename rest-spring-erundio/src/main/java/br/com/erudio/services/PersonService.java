@@ -1,21 +1,22 @@
 package br.com.erudio.services;
 
 import br.com.erudio.controller.PersonController;
+import br.com.erudio.dto.v1.PersonDTOv1;
 import br.com.erudio.dto.v2.PersonDTOv2;
 import br.com.erudio.exceptions.RequiredObjectIsNullExecption;
-import br.com.erudio.mapper.ModelMapper;
 import br.com.erudio.exceptions.ResourceNotFoundExecption;
+import br.com.erudio.mapper.ModelMapper;
 import br.com.erudio.mapper.custom.PersonMapper;
 import br.com.erudio.model.Person;
-import br.com.erudio.dto.v1.PersonDTOv1;
 import br.com.erudio.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.logging.Logger;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class PersonService {
